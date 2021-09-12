@@ -6,11 +6,20 @@ export const serve = (file) => async (req: Request, res: Response) => {
 };
 
 export const dashboard = async (req: Request, res: Response) => {
-  await render('dashboard', res, { reviews: [1,2,3,4]});
+  await render("dashboard", res, { reviews: [1, 2, 3, 4] });
 };
 
 export const users = async (req: Request, res: Response) => {
-  await render('users', res, { users: [1,2,3,4]});
+  await render("users", res, { users: [1, 2, 3, 4] });
+};
+
+export const editFeedback = async (req: Request, res: Response) => {
+  const review = {
+    email: "john.doe@gmail.com",
+    name: "John Doe",
+    comment: "I am really upset about the beaurocracy!!",
+  };
+  await render("edit-feedback", res, { review });
 };
 
 export const publicFileHandler = async (req: Request, res: Response) => {

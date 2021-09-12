@@ -1,0 +1,18 @@
+{{#> layout title='Edit Feedback' }}
+<div class="container">
+      <div class="holder">
+        <div class="title">
+          <h2>Edit Feedback</h2>
+        </div>
+        <div class="login">
+          <form action="login" method="post">
+            <input type="email" placeholder="Email" name="email" id="email" value="{{review.email}}" />
+            <input type="text" placeholder="Name" name="name" id="name" value="{{review.name}}" />
+            <input type="file" name="file" id="file">
+            <textarea name="comment" id="comment" cols="40" rows="10">{{review.comment}}</textarea>
+            <input type="submit" value="Save" />
+          </form>
+        </div>
+      </div>
+    </div>
+{{/layout}}
