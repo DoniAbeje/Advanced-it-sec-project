@@ -9,15 +9,17 @@ export async function dispatch(
   res: Response
 ) {
   const path = url.pathname;
-  if (/^\/public/.test(path)){
+  if (/^\/public/.test(path)) {
     await publicFileHandler(req, res);
-    return
+    return;
   }
 
   for await (const r of routes) {
     if (r.path === path && r.method === method) {
       await r.handler(req, res);
-       break
-     }
+      return;
+    }
+    res.statusCode = 404;
+    res.write("<h1>Page Not Found!!</h1>");
   }
 }
