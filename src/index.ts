@@ -1,5 +1,6 @@
 import * as http from "http";
 import { dispatch } from "./lib/dispatcher";
+import './lib/load-partials';
 
 
 const server = http.createServer(async (req, res) => {
