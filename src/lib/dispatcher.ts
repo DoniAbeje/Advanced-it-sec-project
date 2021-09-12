@@ -1,17 +1,23 @@
+import { publicFileHandler } from "../controllers/controller";
 import { routes } from "../routes";
-import { Request, Response } from "./types";
+import { Request, Response } from "./utils";
 
-export function dispatch(
+export async function dispatch(
   url: URL,
   method: String,
   req: Request,
   res: Response
 ) {
   const path = url.pathname;
-  routes.some((r) => {
+  if (/^\/public/.test(path)){
+    await publicFileHandler(req, res);
+    return
+  }
+
+  for await (const r of routes) {
     if (r.path === path && r.method === method) {
-      r.handler(req, res);
-      return true;
-    }
-  });
+      await r.handler(req, res);
+       break
+     }
+  }
 }

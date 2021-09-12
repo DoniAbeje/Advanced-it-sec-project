@@ -2,10 +2,10 @@ import * as http from "http";
 import { dispatch } from "./lib/dispatcher";
 
 
-const server = http.createServer((req, res) => {
+const server = http.createServer(async (req, res) => {
   const url = new URL(req.url, `http://${req.headers.host}`);
   const method = req.method;
-  dispatch(url, method, req, res);
+  await dispatch(url, method, req, res);
   res.end();
 });
 

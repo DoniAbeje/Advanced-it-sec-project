@@ -1,4 +1,4 @@
-import { Request, Response } from "./lib/types";
+import { Request, Response } from "./lib/utils";
 import * as controller from './controllers/controller';
 
 export class Route {
