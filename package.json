@@ -2,10 +2,10 @@
   "name": "it-sec-project",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "dist/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "npx nodemon src/index.js"
+    "start": "npx nodemon ./src/index.ts"
   },
   "repository": {
     "type": "git",
@@ -18,6 +18,9 @@
   },
   "homepage": "https://github.com/DoniAbeje/Advanced-it-sec-project#readme",
   "devDependencies": {
-    "nodemon": "^2.0.12"
+    "@types/node": "^16.9.1",
+    "nodemon": "^2.0.12",
+    "tslint": "^5.12.1",
+    "typescript": "^3.9.10"
   }
 }
