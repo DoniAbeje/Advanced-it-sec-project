@@ -8,4 +8,7 @@ export const readPartial = async (file: String) => {
 (async function () {
   const top = await readPartial("top");
   hb.registerPartial("top", top);
+
+  const layout = await readPartial('layout');
+  hb.registerPartial('layout', layout);
 })();
