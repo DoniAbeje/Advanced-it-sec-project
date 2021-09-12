@@ -22,5 +22,8 @@
     "nodemon": "^2.0.12",
     "tslint": "^5.12.1",
     "typescript": "^3.9.10"
+  },
+  "dependencies": {
+    "handlebars": "^4.7.7"
   }
 }
