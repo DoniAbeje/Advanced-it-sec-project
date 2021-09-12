@@ -19,7 +19,8 @@ export async function dispatch(
       await r.handler(req, res);
       return;
     }
-    res.statusCode = 404;
-    res.write("<h1>Page Not Found!!</h1>");
   }
+  res.statusCode = 404;
+  res.write("<h1>Page Not Found!!</h1>");
+  res.end()
 }
