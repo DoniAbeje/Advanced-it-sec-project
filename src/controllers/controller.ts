@@ -6,7 +6,11 @@ export const serve = (file) => async (req: Request, res: Response) => {
 };
 
 export const dashboard = async (req: Request, res: Response) => {
-  await render("dashboard", res, { reviews: [1, 2, 3, 4] });
+  await render("feedbacks", res, { feedbacks: [1, 2, 3, 4] });
+};
+
+export const feedbacks = async (req: Request, res: Response) => {
+  await render("feedbacks", res, { feedbacks: [1, 2, 3, 4] });
 };
 
 export const users = async (req: Request, res: Response) => {

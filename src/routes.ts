@@ -14,4 +14,5 @@ export const routes: Route[] = [
   { method: "GET", path: "/add-feedback", handler: controller.serve('add-feedback') },
   { method: "GET", path: "/edit-feedback", handler: controller.editFeedback },
   { method: "GET", path: "/users", handler: controller.users },
+  { method: "GET", path: "/feedbacks", handler: controller.feedbacks },
 ];
