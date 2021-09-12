@@ -1,8 +1,8 @@
 import { render } from "../lib/render";
 import { readFile, Request, Response } from "../lib/utils";
 
-export const loginPage = async (req: Request, res: Response) => {
- await render("login", res);
+export const serve = (file) => async (req: Request, res: Response) => {
+  await render(file, res);
 };
 
 export const publicFileHandler = async (req: Request, res: Response) => {
