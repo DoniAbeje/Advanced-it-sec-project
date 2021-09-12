@@ -1,0 +1,18 @@
+{{#> layout title='Dashboard' }}
+    <div class="feedback-container">
+      <div class="action-holder">
+        <H2>Users List</H2>
+      </div>
+      {{#each users}}
+      <div class="card-holder">
+        <div class="card">
+          <p>Doni Abeje</p>
+          <p>Doni@gmail.com</p>
+          <div class="action-holder">
+            <a id="add-feedback-button" href="">Disable</a>
+          </div>
+        </div>
+      </div>
+      {{/each}}
+    </div>
+{{/layout}}

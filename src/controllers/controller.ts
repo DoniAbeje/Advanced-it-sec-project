@@ -9,6 +9,10 @@ export const dashboard = async (req: Request, res: Response) => {
   await render('dashboard', res, { reviews: [1,2,3,4]});
 };
 
+export const users = async (req: Request, res: Response) => {
+  await render('users', res, { users: [1,2,3,4]});
+};
+
 export const publicFileHandler = async (req: Request, res: Response) => {
   try {
     const data = await readFile("./src" + req.url);
