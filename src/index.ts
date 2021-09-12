@@ -5,6 +5,7 @@ type Response = http.ServerResponse;
 
 class Route {
   path: String;
+  method: String;
   handler: (req: Request, res: Response) => void;
 }
 
@@ -12,14 +13,21 @@ const homeHandler = (req: Request, res: Response) => {
   res.write("this");
 };
 
-const routes: Route[] = [{ path: "/", handler: homeHandler }];
+const routes: Route[] = [{ method: "GET", path: "/", handler: homeHandler }];
 
-function dispatch(url: URL) {
+function dispatch(url: URL, method: String, req: Request, res: Response) {
   const path = url.pathname;
-  console.log(path);
+  routes.some((r) => {
+    if (r.path === path && r.method === method) {
+      r.handler(req, res);
+      return true;
+    }
+  });
 }
 const server = http.createServer((req, res) => {
-  dispatch(new URL(req.url, req.headers.host));
+  const url = new URL(req.url, `http://${req.headers.host}`);
+  const method = req.method;
+  dispatch(url, method, req, res);
   res.end();
 });
 
