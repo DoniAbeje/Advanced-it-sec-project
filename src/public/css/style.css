@@ -1,0 +1,74 @@
+body, html {
+    margin: 0;
+    padding: 0;
+    font-size: 16px;
+    font-family: Inter;
+    background-color: rgb(245, 244, 244);
+}
+
+.container {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.title {
+    font-size: 24px;
+    color: white;
+    background-color: #99c2a2;
+    padding-left: 10px;
+}
+
+.login {
+    width: 350px;
+    background-color: #99c2a2;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+}
+
+input {
+    height: 20px;
+    display: block;
+    margin: 20px;
+    padding: 5px;
+    border: solid 1px #7a918d;
+}
+
+input[type=submit], #add-feedback-button {
+    height: 29px;
+    min-width: 100px;
+    background-color: #dbfeb8;
+    color: black;
+    padding: 5px;
+    border: black solid 1px;
+}
+
+a {
+    text-decoration: none;
+    color:#dbfeb8;
+}
+
+.card-holder {
+    width: 500px;
+    background-color: #7a918d;
+    padding: 10px;
+    margin-bottom: 5px;
+}
+
+.feedback-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.action-holder {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    width: 500px;
+}
