@@ -1,8 +1,9 @@
 import * as http from "http";
 import { dispatch } from "./lib/dispatcher";
-import './lib/load-partials';
+import "./lib/load-partials";
+import dotenv from "dotenv";
 
-
+dotenv.config();
 const server = http.createServer(async (req, res) => {
   const url = new URL(req.url, `http://${req.headers.host}`);
   const method = req.method;
