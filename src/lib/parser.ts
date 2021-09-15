@@ -1,0 +1,18 @@
+import { IncomingMessage } from "http";
+import querystring from "querystring";
+
+export async function parse(req: IncomingMessage) {
+  let body = await new Promise((resolve, reject) => {
+    let body = "";
+    req.on("data", (chunk) => {
+      body += chunk.toString();
+    });
+    req.on("end", () => {
+      resolve(querystring.parse(body));
+    });
+    req.on("error", (e) => {
+      reject(e);
+    });
+  });
+  return body;
+}
