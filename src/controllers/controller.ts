@@ -1,4 +1,7 @@
+import { randomUUID } from "crypto";
+import { uuid } from "uuidv4";
 import { render } from "../lib/render";
+import { session } from "../lib/session";
 import { readFile, Request, Response } from "../lib/utils";
 import { validateRegister } from "../lib/validator";
 import * as repo from "../repositories/user.repository";
@@ -26,6 +29,29 @@ export const register = async (req: Request, res: Response) => {
 
   await repo.register(name, email, password);
   await render("register", res, { success: ["Registered!!"] });
+};
+
+export const login = async (req: Request, res: Response) => {
+  const body = req["body"];
+
+  const { email, password } = body;
+  const [rows] = await repo.login(email, password);
+
+  if (!rows.length) {
+    return await render("login", res, {
+      errors: ["Incorrect email or password"],
+      ...body,
+    });
+  }
+  const id = uuid();
+  session.users.push({ sessionId: id, data: rows[0] });
+
+  const maxAge = 86400;
+  res.writeHead(302, {
+    "Set-Cookie": `sessionId=${id};HttpOnly;max-age=${maxAge}`,
+    Location: "/feedbacks",
+  });
+
 };
 
 export const dashboard = async (req: Request, res: Response) => {

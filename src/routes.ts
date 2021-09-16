@@ -9,6 +9,7 @@ export class Route {
 
 export const routes: Route[] = [
   { method: "GET", path: "/login", handler: controller.serve("login") },
+  { method: "POST", path: "/login", handler: controller.login },
   { method: "GET", path: "/register", handler: controller.serve("register") },
   { method: "POST", path: "/register", handler: controller.register },
   { method: "GET", path: "/dashboard", handler: controller.dashboard },

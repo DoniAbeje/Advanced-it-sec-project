@@ -6,10 +6,19 @@
         </div>
         <div class="login">
           <form action="login" method="post">
-            <input type="email" placeholder="Email" name="email" id="email" />
+            <input type="email" placeholder="Email" name="email" id="email" value="{{email}}"/>
             <input type="password" placeholder="Password" name="password" id="password" />
             <input type="submit" value="Login" />
             <p>Don't have an account? <a href="/register">SignUp</a></p>
+            
+              {{#each errors}}
+              <p class="error">{{this}}</p>
+              {{/each}}
+
+              {{#each success}}
+              <p class="success">{{this}}</p>
+              {{/each}}
+
           </form>
         </div>
       </div>
