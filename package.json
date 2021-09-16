@@ -18,12 +18,14 @@
   },
   "homepage": "https://github.com/DoniAbeje/Advanced-it-sec-project#readme",
   "devDependencies": {
+    "@types/bcrypt": "^5.0.0",
     "@types/node": "^16.9.1",
     "nodemon": "^2.0.12",
     "tslint": "^5.12.1",
     "typescript": "^3.9.10"
   },
   "dependencies": {
+    "bcrypt": "^5.0.1",
     "dotenv": "^10.0.0",
     "handlebars": "^4.7.7",
     "mysql2": "^2.3.0",

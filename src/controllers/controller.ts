@@ -5,6 +5,9 @@ import { session } from "../lib/session";
 import { readFile, Request, Response } from "../lib/utils";
 import { validateRegister } from "../lib/validator";
 import * as repo from "../repositories/user.repository";
+import { hash, compare } from "bcrypt";
+
+const saltRound = 10;
 
 export const serve = (file) => async (req: Request, res: Response) => {
   await render(file, res);
@@ -27,7 +30,8 @@ export const register = async (req: Request, res: Response) => {
     });
   }
 
-  await repo.register(name, email, password);
+  const passwordHash = await hash(password, saltRound);
+  await repo.register(name, email, passwordHash);
   await render("register", res, { success: ["Registered!!"] });
 };
 
@@ -35,14 +39,15 @@ export const login = async (req: Request, res: Response) => {
   const body = req["body"];
 
   const { email, password } = body;
-  const [rows] = await repo.login(email, password);
+  const [rows] = await repo.findUserByEmail(email);
 
-  if (!rows.length) {
+  if (!rows.length || !(await compare(password, rows[0].password))) {
     return await render("login", res, {
       errors: ["Incorrect email or password"],
       ...body,
     });
   }
+
   const id = uuid();
   session.users.push({ sessionId: id, data: rows[0] });
 
@@ -51,7 +56,6 @@ export const login = async (req: Request, res: Response) => {
     "Set-Cookie": `sessionId=${id};HttpOnly;max-age=${maxAge}`,
     Location: "/feedbacks",
   });
-
 };
 
 export const dashboard = async (req: Request, res: Response) => {
