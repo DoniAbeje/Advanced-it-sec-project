@@ -1,5 +1,7 @@
 import { Request, Response } from "./lib/utils";
 import * as controller from "./controllers/controller";
+import * as userController from "./controllers/user.controller";
+
 
 export class Route {
   path: String;
@@ -9,9 +11,11 @@ export class Route {
 
 export const routes: Route[] = [
   { method: "GET", path: "/login", handler: controller.serve("login") },
-  { method: "POST", path: "/login", handler: controller.login },
+  { method: "POST", path: "/login", handler: userController.login },
+
   { method: "GET", path: "/register", handler: controller.serve("register") },
-  { method: "POST", path: "/register", handler: controller.register },
+  { method: "POST", path: "/register", handler: userController.register },
+  
   { method: "GET", path: "/dashboard", handler: controller.dashboard },
   {
     method: "GET",
