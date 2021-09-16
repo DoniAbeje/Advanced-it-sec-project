@@ -6,6 +6,7 @@ import * as userController from "./controllers/user.controller";
 export class Route {
   path: String;
   method: String;
+  auth?: boolean = false;
   handler: (req: Request, res: Response) => void;
 }
 
@@ -15,7 +16,7 @@ export const routes: Route[] = [
 
   { method: "GET", path: "/register", handler: controller.serve("register") },
   { method: "POST", path: "/register", handler: userController.register },
-  
+
   { method: "GET", path: "/dashboard", handler: controller.dashboard },
   {
     method: "GET",
@@ -25,5 +26,5 @@ export const routes: Route[] = [
   { method: "GET", path: "/edit-feedback", handler: controller.editFeedback },
   // admin
   { method: "GET", path: "/users", handler: controller.users },
-  { method: "GET", path: "/feedbacks", handler: controller.feedbacks },
+  { method: "GET", path: "/feedbacks", handler: controller.feedbacks, auth: true },
 ];
