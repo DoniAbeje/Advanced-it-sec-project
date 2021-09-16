@@ -8,10 +8,6 @@ import { hash, compare } from "bcrypt";
 
 const saltRound = 10;
 
-export const serve = (file) => async (req: Request, res: Response) => {
-  await render(file, res);
-};
-
 export const register = async (req: Request, res: Response) => {
   const body = req["body"];
   const validationResult = validateRegister(body);
