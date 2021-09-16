@@ -1,6 +1,7 @@
 import { Request, Response } from "./lib/utils";
 import * as controller from "./controllers/controller";
 import * as userController from "./controllers/user.controller";
+import * as feedbackController from "./controllers/feedback.controller";
 
 export class Route {
   path: String;
@@ -29,7 +30,15 @@ export const routes: Route[] = [
   {
     method: "GET",
     path: "/add-feedback",
-    handler: controller.serve("add-feedback"),
+    handler: controller.serve("add-feedback", true),
+    auth: true,
+  },
+  {
+    method: "POST",
+    path: "/add-feedback",
+    handler: feedbackController.addFeedback,
+    auth: true,
+    csrf: true,
   },
   { method: "GET", path: "/edit-feedback", handler: controller.editFeedback },
   // admin

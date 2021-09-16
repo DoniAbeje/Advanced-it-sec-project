@@ -5,12 +5,21 @@
           <h2>Add Feedback</h2>
         </div>
         <div class="login">
-          <form action="login" method="post">
-            <input type="email" placeholder="Email" name="email" id="email" />
-            <input type="text" placeholder="Name" name="name" id="name" />
+          <form action="/add-feedback" method="post">
+            <input type="hidden" name="csrf" value="{{csrf}}">
+            <input type="email" placeholder="Email" name="email" id="email" required value="{{email}}" />
+            <input type="text" placeholder="Name" name="name" id="name" required value="{{name}}" />
             <input type="file" name="file" id="file">
-            <textarea name="comment" id="comment" cols="40" rows="10"></textarea>
+            <textarea name="comment" id="comment" cols="40" rows="10" required>{{comment}}</textarea>
             <input type="submit" value="Save" />
+
+              {{#each errors}}
+              <p class="error">{{this}}</p>
+              {{/each}}
+
+              {{#each success}}
+              <p class="success">{{this}}</p>
+              {{/each}}
           </form>
         </div>
       </div>

@@ -3,9 +3,11 @@ import { render } from "../lib/render";
 import { session } from "../lib/session";
 import { readFile, Request, Response } from "../lib/utils";
 
-export const serve = (file) => async (req: Request, res: Response) => {
-  await render(file, res);
-};
+export const serve =
+  (file, _csrf = false) =>
+  async (req: Request, res: Response) => {
+    await render(file, res, _csrf ? { csrf: setCsrf(req) } : null);
+  };
 
 export const dashboard = async (req: Request, res: Response) => {
   await render("feedbacks", res, { feedbacks: [1, 2, 3, 4] });
