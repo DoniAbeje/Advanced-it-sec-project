@@ -31,6 +31,12 @@ function notAuthenticated(res) {
   res.end();
 }
 
+function unauthorized(res) {
+  res.statusCode = 403;
+  res.write("<h1>Unauthorized!!</h1>");
+  res.end();
+}
+
 export async function dispatch(
   url: URL,
   method: String,
@@ -52,6 +58,11 @@ export async function dispatch(
         return notAuthenticated(res);
       }
 
+      if (r.role != null) {
+        if(!user || user.data.role != r.role){
+          return unauthorized(res)
+        }
+      }
       req["user"] = user ? user.data : undefined;
       await r.handler(req, res);
       return;

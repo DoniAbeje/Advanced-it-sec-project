@@ -7,6 +7,7 @@ export class Route {
   path: String;
   method: String;
   auth?: boolean = false;
+  role? = null; 
   handler: (req: Request, res: Response) => void;
 }
 
@@ -26,5 +27,5 @@ export const routes: Route[] = [
   { method: "GET", path: "/edit-feedback", handler: controller.editFeedback },
   // admin
   { method: "GET", path: "/users", handler: controller.users },
-  { method: "GET", path: "/feedbacks", handler: controller.feedbacks, auth: true },
+  { method: "GET", path: "/feedbacks", handler: controller.feedbacks, auth: true, role: 1 },
 ];
