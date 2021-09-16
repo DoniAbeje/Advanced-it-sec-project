@@ -56,3 +56,17 @@ export const login = async (req: Request, res: Response) => {
     Location: "/feedbacks",
   });
 };
+
+export const logout = async (req: Request, res: Response) => {
+  const body = req["body"];
+  const user = req["user"];
+
+  var index = session.users.findIndex((u) => u.data.id == user.id);
+  if (index !== -1) {
+    session.users.splice(index, 1);
+  }
+
+  res.writeHead(302, {
+    Location: "/login",
+  });
+};

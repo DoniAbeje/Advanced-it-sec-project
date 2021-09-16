@@ -82,3 +82,11 @@ a {
     color: blue;
     text-transform: capitalize;
 }
+
+.logout-form {
+    display: inline;
+}
+
+.logout-form input {
+    display: inline;
+}

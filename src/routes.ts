@@ -14,6 +14,7 @@ export class Route {
 export const routes: Route[] = [
   { method: "GET", path: "/login", handler: controller.serve("login") },
   { method: "POST", path: "/login", handler: userController.login },
+  { method: "POST", path: "/logout", handler: userController.logout, auth: true },
 
   { method: "GET", path: "/register", handler: controller.serve("register") },
   { method: "POST", path: "/register", handler: userController.register },
@@ -27,5 +28,5 @@ export const routes: Route[] = [
   { method: "GET", path: "/edit-feedback", handler: controller.editFeedback },
   // admin
   { method: "GET", path: "/users", handler: controller.users },
-  { method: "GET", path: "/feedbacks", handler: controller.feedbacks, auth: true, role: 1 },
+  { method: "GET", path: "/feedbacks", handler: controller.feedbacks, auth: true },
 ];
