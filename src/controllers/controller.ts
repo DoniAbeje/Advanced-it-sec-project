@@ -9,10 +9,6 @@ export const serve =
     await render(file, res, _csrf ? { csrf: setCsrf(req) } : null);
   };
 
-export const dashboard = async (req: Request, res: Response) => {
-  await render("feedbacks", res, { feedbacks: [1, 2, 3, 4] });
-};
-
 export const feedbacks = async (req: Request, res: Response) => {
   const csrf = setCsrf(req);
   await render("feedbacks", res, { feedbacks: [1, 2, 3, 4], csrf });

@@ -18,3 +18,9 @@ export async function addFeedback(req: Request, res: Response) {
   await repo.addFeedback(name, email, comment, user.id);
   return await render("add-feedback", res, { success: ["Feedback added!!"] });
 }
+
+export const dashboard = async (req: Request, res: Response) => {
+  const user = req["user"];
+  const [rows] = await repo.findFeedbacksByUserId(user.id);  
+  await render("feedbacks", res, { feedbacks: rows });
+};

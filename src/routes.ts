@@ -26,7 +26,12 @@ export const routes: Route[] = [
   { method: "GET", path: "/register", handler: controller.serve("register") },
   { method: "POST", path: "/register", handler: userController.register },
 
-  { method: "GET", path: "/dashboard", handler: controller.dashboard },
+  {
+    method: "GET",
+    path: "/dashboard",
+    handler: feedbackController.dashboard,
+    auth: true,
+  },
   {
     method: "GET",
     path: "/add-feedback",
