@@ -72,3 +72,13 @@ a {
     margin-bottom: 20px;
     width: 500px;
 }
+
+.error{
+    color: red;
+    text-transform: capitalize;
+}
+
+.success {
+    color: blue;
+    text-transform: capitalize;
+}
