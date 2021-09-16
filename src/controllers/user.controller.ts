@@ -58,7 +58,6 @@ export const login = async (req: Request, res: Response) => {
 };
 
 export const logout = async (req: Request, res: Response) => {
-  const body = req["body"];
   const user = req["user"];
 
   var index = session.users.findIndex((u) => u.data.id == user.id);
@@ -70,3 +69,4 @@ export const logout = async (req: Request, res: Response) => {
     Location: "/login",
   });
 };
+

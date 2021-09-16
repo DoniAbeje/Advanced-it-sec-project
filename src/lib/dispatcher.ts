@@ -19,6 +19,17 @@ function parseCookies(req) {
   return list;
 }
 
+export function checkCsrf(req) {
+  const { csrf } = req["body"];
+  const user = req["user"];
+
+  const pass = session.users.some(
+    (u) => u.data.id == user.id && u.csrf == csrf
+  );
+
+  return pass;
+}
+
 function notFound(res) {
   res.statusCode = 404;
   res.write("<h1>Page Not Found!!</h1>");
@@ -37,6 +48,11 @@ function unauthorized(res) {
   res.end();
 }
 
+function csrfMismatch(res) {
+  res.statusCode = 400;
+  res.write("<h1>CSRF Mismatch!!</h1>");
+  res.end();
+}
 export async function dispatch(
   url: URL,
   method: String,
@@ -53,17 +69,22 @@ export async function dispatch(
     if (r.path === path && r.method === method) {
       const cookies = parseCookies(req);
       const user = getUser(cookies.sessionId);
+      req["user"] = user ? user.data : undefined;
 
       if (r.auth && !user) {
         return notAuthenticated(res);
       }
 
       if (r.role != null) {
-        if(!user || user.data.role != r.role){
-          return unauthorized(res)
+        if (!user || user.data.role != r.role) {
+          return unauthorized(res);
         }
       }
-      req["user"] = user ? user.data : undefined;
+
+      if (r.csrf && !checkCsrf(req)) {
+        return csrfMismatch(res);
+      }
+
       await r.handler(req, res);
       return;
     }

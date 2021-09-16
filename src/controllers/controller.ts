@@ -1,4 +1,6 @@
+import { uuid } from "uuidv4";
 import { render } from "../lib/render";
+import { session } from "../lib/session";
 import { readFile, Request, Response } from "../lib/utils";
 
 export const serve = (file) => async (req: Request, res: Response) => {
@@ -10,7 +12,8 @@ export const dashboard = async (req: Request, res: Response) => {
 };
 
 export const feedbacks = async (req: Request, res: Response) => {
-  await render("feedbacks", res, { feedbacks: [1, 2, 3, 4] });
+  const csrf = setCsrf(req);
+  await render("feedbacks", res, { feedbacks: [1, 2, 3, 4], csrf });
 };
 
 export const users = async (req: Request, res: Response) => {
@@ -35,3 +38,11 @@ export const publicFileHandler = async (req: Request, res: Response) => {
     res.writeHead(404);
   }
 };
+
+export function setCsrf(req) {
+  const csrf = uuid();
+  const user = req["user"];
+  const userSession = session.users.find((u) => u.data.id == user.id);
+  userSession.csrf = csrf;
+  return csrf;
+}
