@@ -45,7 +45,19 @@ export const routes: Route[] = [
     auth: true,
     csrf: true,
   },
-  { method: "GET", path: "/edit-feedback", handler: controller.editFeedback },
+  {
+    method: "GET",
+    path: "/edit-feedback",
+    handler: feedbackController.displayEditFeedback,
+    auth: true,
+  },
+  {
+    method: "POST",
+    path: "/edit-feedback",
+    handler: feedbackController.editFeedback,
+    auth: true,
+    csrf: true
+  },
   // admin
   { method: "GET", path: "/users", handler: controller.users },
   {
