@@ -10,9 +10,10 @@
             <input type="email" placeholder="Email" name="email" id="email" required value="{{email}}" />
             <input type="text" placeholder="Name" name="name" id="name" required value="{{name}}" />
             <input type="file" name="file" id="file">
-            <textarea name="comment" id="comment" cols="40" rows="10" required>{{comment}}</textarea>
+            <textarea name="comment" id="comment" cols="40" rows="10" placeholder="Comment..." required>{{comment}}</textarea>
+            <input type="text" placeholder="Captcha" name="captcha" id="captcha" required value="{{captcha}}" />
+            <img class="captcha-image" src="{{captchaImage}}" >
             <input type="submit" value="Save" />
-
               {{#each errors}}
               <p class="error">{{this}}</p>
               {{/each}}

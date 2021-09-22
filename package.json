@@ -25,6 +25,7 @@
     "typescript": "^3.9.10"
   },
   "dependencies": {
+    "@haileybot/captcha-generator": "^1.7.0",
     "bcrypt": "^5.0.1",
     "dotenv": "^10.0.0",
     "handlebars": "^4.7.7",

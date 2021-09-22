@@ -2,11 +2,21 @@ import { uuid } from "uuidv4";
 import { render } from "../lib/render";
 import { session } from "../lib/session";
 import { readFile, Request, Response } from "../lib/utils";
+import Captcha from "@haileybot/captcha-generator";
 
 export const serve =
-  (file, _csrf = false) =>
+  (file, _csrf = false, captcha = false) =>
   async (req: Request, res: Response) => {
-    await render(file, res, _csrf ? { csrf: setCsrf(req) } : null);
+    const context: any = {}
+    if(_csrf){
+      context.csrf = setCsrf(req);
+    }
+    
+    if(captcha){
+      context.captchaImage = setCaptcha(req);
+    }
+
+    await render(file, res, context);
   };
 
 export const feedbacks = async (req: Request, res: Response) => {
@@ -43,4 +53,12 @@ export function setCsrf(req) {
   const userSession = session.users.find((u) => u.data.id == user.id);
   userSession.csrf = csrf;
   return csrf;
+}
+
+export function setCaptcha(req) {
+  const captcha = new Captcha();
+  const user = req["user"];
+  const userSession = session.users.find((u) => u.data.id == user.id);
+  userSession.captcha = captcha.value;
+  return captcha.dataURL;
 }

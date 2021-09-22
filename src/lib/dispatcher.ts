@@ -30,6 +30,17 @@ export function checkCsrf(req) {
   return pass;
 }
 
+export function checkCaptcha(req) {
+  const { captcha } = req["body"];
+  const user = req["user"];
+
+  const pass = session.users.some(
+    (u) => u.data.id == user.id && u.captcha == captcha
+  );
+
+  return pass;
+}
+
 function notFound(res) {
   res.statusCode = 404;
   res.write("<h1>Page Not Found!!</h1>");
@@ -53,6 +64,13 @@ function csrfMismatch(res) {
   res.write("<h1>CSRF Mismatch!!</h1>");
   res.end();
 }
+
+function captchaFaild(res) {
+  res.statusCode = 400;
+  res.write("<h1>Captcha Faild!!</h1>");
+  res.end();
+}
+
 export async function dispatch(
   url: URL,
   method: String,
@@ -83,6 +101,10 @@ export async function dispatch(
 
       if (r.csrf && !checkCsrf(req)) {
         return csrfMismatch(res);
+      }
+
+      if (r.captcha && !checkCaptcha(req)) {
+        return captchaFaild(res);
       }
 
       await r.handler(req, res);

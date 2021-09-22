@@ -4,7 +4,7 @@ import { Request, Response } from "../lib/utils";
 import { validateAddFeedback } from "../lib/validator";
 import * as repo from "../repositories/feedback.repository";
 import * as url from "url";
-import { setCsrf } from "./controller";
+import { setCaptcha, setCsrf } from "./controller";
 
 export async function addFeedback(req: Request, res: Response) {
   const user = req["user"];
@@ -44,7 +44,7 @@ export async function displayEditFeedback(req: Request, res: Response) {
     return;
   }
 
-  await render("edit-feedback", res, { ...rows[0], csrf: setCsrf(req) });
+  await render("edit-feedback", res, { ...rows[0], csrf: setCsrf(req), captchaImage: setCaptcha(req) });
 }
 
 export async function editFeedback(req: Request, res: Response) {

@@ -8,6 +8,7 @@ export class Route {
   method: String;
   auth?: boolean = false;
   csrf?: boolean = false;
+  captcha?: boolean = false;
   role? = null;
   handler: (req: Request, res: Response) => void;
 }
@@ -35,7 +36,7 @@ export const routes: Route[] = [
   {
     method: "GET",
     path: "/add-feedback",
-    handler: controller.serve("add-feedback", true),
+    handler: controller.serve("add-feedback", true, true),
     auth: true,
   },
   {
@@ -44,6 +45,7 @@ export const routes: Route[] = [
     handler: feedbackController.addFeedback,
     auth: true,
     csrf: true,
+    captcha: true
   },
   {
     method: "GET",
@@ -56,7 +58,8 @@ export const routes: Route[] = [
     path: "/edit-feedback",
     handler: feedbackController.editFeedback,
     auth: true,
-    csrf: true
+    csrf: true,
+    captcha: true
   },
   // admin
   { method: "GET", path: "/users", handler: controller.users },

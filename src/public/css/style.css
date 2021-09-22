@@ -90,3 +90,7 @@ a {
 .logout-form input {
     display: inline;
 }
+
+.captcha-image {
+    width: 300px;
+}
