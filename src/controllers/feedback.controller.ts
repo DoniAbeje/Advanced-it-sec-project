@@ -24,7 +24,7 @@ export async function addFeedback(req: Request, res: Response) {
 export const dashboard = async (req: Request, res: Response) => {
   const user = req["user"];
   const [rows] = await repo.findFeedbacksByUserId(user.id);
-  await render("feedbacks", res, { feedbacks: rows });
+  await render("feedbacks", res, { feedbacks: rows, csrf: setCsrf(req) });
 };
 
 export async function displayEditFeedback(req: Request, res: Response) {
