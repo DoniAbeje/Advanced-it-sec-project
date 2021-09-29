@@ -49,7 +49,7 @@ export const login = async (req: Request, res: Response) => {
   const maxAge = 86400;
   res.writeHead(302, {
     "Set-Cookie": `sessionId=${id};HttpOnly;max-age=${maxAge}`,
-    Location: rows[0].role == 1 ? "/feedbacks" : "/dashboard",
+    Location: rows[0].role == 1 ? "/users" : "/dashboard",
   });
 };
 

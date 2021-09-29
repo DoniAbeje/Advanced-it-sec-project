@@ -24,3 +24,8 @@ export async function findUserByEmail(email: string) {
   const sql = "select * from users where email=?;";
   return await connection.execute(sql, [email]);
 }
+
+export async function findAll() {
+  const sql = "select * from users where 1;";
+  return await connection.execute(sql,[]);
+}

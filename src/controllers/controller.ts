@@ -3,6 +3,7 @@ import { render } from "../lib/render";
 import { session } from "../lib/session";
 import { readFile, Request, Response } from "../lib/utils";
 import Captcha from "@haileybot/captcha-generator";
+import * as repo from "../repositories/user.repository";
 
 export const serve =
   (file, _csrf = false, captcha = false) =>
@@ -25,7 +26,8 @@ export const feedbacks = async (req: Request, res: Response) => {
 };
 
 export const users = async (req: Request, res: Response) => {
-  await render("users", res, { users: [1, 2, 3, 4] });
+  const [rows] = await repo.findAll();
+  await render("users", res, { users: rows, csrf: setCsrf(req) });
 };
 
 export const editFeedback = async (req: Request, res: Response) => {

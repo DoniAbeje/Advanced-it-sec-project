@@ -45,7 +45,7 @@ export const routes: Route[] = [
     handler: feedbackController.addFeedback,
     auth: true,
     csrf: true,
-    captcha: true
+    captcha: true,
   },
   {
     method: "GET",
@@ -59,10 +59,10 @@ export const routes: Route[] = [
     handler: feedbackController.editFeedback,
     auth: true,
     csrf: true,
-    captcha: true
+    captcha: true,
   },
   // admin
-  { method: "GET", path: "/users", handler: controller.users },
+  { method: "GET", path: "/users", handler: controller.users, role: 1 },
   {
     method: "GET",
     path: "/feedbacks",
