@@ -36,6 +36,13 @@ export const login = async (req: Request, res: Response) => {
   const { email, password } = body;
   const [rows] = await repo.findUserByEmail(email);
 
+  if (rows.length &&  rows[0].disabled) {
+    return await render("login", res, {
+      errors: ["This account is locked!!"],
+      ...body,
+    });
+  }
+  
   if (!rows.length || !(await compare(password, rows[0].password))) {
     return await render("login", res, {
       errors: ["Incorrect email or password"],
