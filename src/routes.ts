@@ -63,6 +63,8 @@ export const routes: Route[] = [
   },
   // admin
   { method: "GET", path: "/users", handler: controller.users, role: 1 },
+  { method: "POST", path: "/disable", handler: controller.disable, role: 1 },
+  { method: "POST", path: "/enable", handler: controller.enable, role: 1 },
   {
     method: "GET",
     path: "/feedbacks",

@@ -10,12 +10,12 @@ export async function login(email: string, password: string) {
   return await connection.execute(sql, [email, password]);
 }
 
-export async function disable(id: number) {
+export async function disable(id) {
   const sql = "update users set disabled=true where id=?;";
   return await connection.execute(sql, [id]);
 }
 
-export async function enable(id: number) {
+export async function enable(id) {
   const sql = "update users set disabled=false where id=?;";
   return await connection.execute(sql, [id]);
 }
