@@ -68,5 +68,6 @@ export const routes: Route[] = [
     path: "/feedbacks",
     handler: controller.feedbacks,
     auth: true,
+    role: 1
   },
 ];

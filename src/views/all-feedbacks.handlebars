@@ -1,22 +1,21 @@
 {{#> layout title='Dashboard' }}
-    <div class="feedback-container">
+<div class="feedback-container">
       <div class="action-holder">
-        <H2>Users List</H2>
-      </div>
-      <div class="action-holder">
-        <a id="add-feedback-button" href="/feedbacks">Feedbacks List</a>
+        <a id="add-feedback-button" href="/users">Users List</a>
         <form class="logout-form" action="/logout" method="POST">
         <input type="hidden" name="csrf" value="{{csrf}}">
         <input type="submit" value="Logout">
         </form>
       </div>
-      {{#each users}}
+          {{#each feedbacks}}
       <div class="card-holder">
         <div class="card">
           <p>{{this.name}}</p>
           <p>{{this.email}}</p>
+          <p>
+            {{this.comment}}
+          </p>
           <div class="action-holder">
-            <a id="add-feedback-button" href="">Disable</a>
           </div>
         </div>
       </div>

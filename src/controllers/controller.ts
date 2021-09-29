@@ -4,16 +4,17 @@ import { session } from "../lib/session";
 import { readFile, Request, Response } from "../lib/utils";
 import Captcha from "@haileybot/captcha-generator";
 import * as repo from "../repositories/user.repository";
+import * as feedbackRepo from "../repositories/feedback.repository";
 
 export const serve =
   (file, _csrf = false, captcha = false) =>
   async (req: Request, res: Response) => {
-    const context: any = {}
-    if(_csrf){
+    const context: any = {};
+    if (_csrf) {
       context.csrf = setCsrf(req);
     }
-    
-    if(captcha){
+
+    if (captcha) {
       context.captchaImage = setCaptcha(req);
     }
 
@@ -22,7 +23,9 @@ export const serve =
 
 export const feedbacks = async (req: Request, res: Response) => {
   const csrf = setCsrf(req);
-  await render("feedbacks", res, { feedbacks: [1, 2, 3, 4], csrf });
+  const [rows] = await feedbackRepo.findAll();
+  
+  await render("all-feedbacks", res, { feedbacks: rows, csrf });
 };
 
 export const users = async (req: Request, res: Response) => {

@@ -30,3 +30,8 @@ export async function findFeedbackIdAndUserId(id, userId: number) {
   const sql = "select * from feedbacks where id = ? and user_id = ?";
   return await connection.execute(sql, [id, userId]);
 }
+
+export async function findAll() {
+  const sql = "select * from feedbacks where 1";
+  return await connection.execute(sql, []);
+}
